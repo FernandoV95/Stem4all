@@ -25,18 +25,7 @@ VideosRt.get('/ver/:id',
     VideosCtl.verVideosId
 )
 
-
-//Actualizar datos del video
-VideosRt.put('/actualizar/:id',
-    InputErrors,
-    VideosCtl.actualizarVideo
-)
-
-//Borrar video
-VideosRt.delete('/borrar/:id',
-    InputErrors,
-    VideosCtl.borrarVideo
-)
+ 
 
 
 
