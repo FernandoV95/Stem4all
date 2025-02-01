@@ -11,4 +11,17 @@ UsuariosRt.post('/nuevo',
     UsuarioCtl.nuevoUsuario
 )
 
+//Agregar video a la lista
+UsuariosRt.patch('/:idU/agregar-video/:idV',
+    InputErrors,
+    UsuarioCtl.agregarVideo
+)
+
+//Borrar video a la lista
+UsuariosRt.delete('/:idU/borrar-video/:idV',
+    InputErrors,
+    UsuarioCtl.borrarVideo
+)
+
+
 export default UsuariosRt

@@ -28,7 +28,7 @@ export class Autenticacion {
         }
 
 
-        //Verifica si la cuenta esta confirmada
+        //Verifica si la cuenta esta verificada
         if (!usuario.verificado) {
             const error = new Error('¡Cuenta no verificada!')
             res.status(401).json({ error: error.message })
@@ -38,6 +38,13 @@ export class Autenticacion {
         //Verificamos si la cuenta si tiene el acceso
         if (!usuario.autorizado) {
             const error = new Error('¡Aun no has sido autorizado!')
+            res.status(401).json({ error: error.message })
+            return
+        }
+
+        //Verificamos si la cuenta esta suspendida
+        if (usuario.suspendido) {
+            const error = new Error('¡Cuenta suspendida!')
             res.status(401).json({ error: error.message })
             return
         }
@@ -168,6 +175,4 @@ export class Autenticacion {
             return
         }
     }
-
-
 }

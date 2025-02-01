@@ -27,6 +27,7 @@ export interface IUsuario extends Document {
 
     verificado: boolean
     autorizado: boolean
+    suspendido: boolean
 }
 
 const UsuarioEsquema: Schema = new Schema({
@@ -97,6 +98,10 @@ const UsuarioEsquema: Schema = new Schema({
         type: Boolean,
         default: false
     },
+    suspendido:{
+        type: Boolean,
+        default: false
+    }
 }, { timestamps: true }
 )
 

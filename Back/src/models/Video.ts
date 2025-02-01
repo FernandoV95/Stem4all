@@ -10,7 +10,7 @@ export interface IVideos extends Document {
 }
 
 //Para MongoDB
-const ProjectSchema: Schema = new Schema({
+const VideoSchema: Schema = new Schema({
     titulo:{
         type:String,
         required:true
@@ -34,5 +34,5 @@ const ProjectSchema: Schema = new Schema({
     }
    }, {timestamps: true }
 );
-const Videos = mongoose.model< IVideos >('videos',ProjectSchema)
+const Videos = mongoose.model< IVideos >('videos',VideoSchema)
 export default Videos
