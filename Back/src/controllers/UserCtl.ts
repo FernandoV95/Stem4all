@@ -130,14 +130,14 @@ export class UsuarioCtl {
                 res.status(409).json({ error: '¡El video no existe!' });
                 return
             }
- 
+
             // Buscar el historial del usuario con el video específico
             const historial = await Registro.findOne({ usuario: idU, videos: { $in: [idV] } });
 
             if (historial) {
                 // Si ya existe un historial con ese video, retornamos un mensaje
-                res.status(400).json({error: '¡Ya viste este video!' });
-                return 
+                res.status(400).json({ error: '¡Ya viste este video!' });
+                return
             }
 
             //Agregamos el video en el historial
@@ -173,11 +173,21 @@ export class UsuarioCtl {
                 return
             }
 
-            //Buscamos el historial del usuario
-            let historial = await Registro.findOne({ usuario: idU.toString() });
+            // Buscar el historial del usuario con el video específico
+            const historial = await Registro.findOne({ usuario: idU, videos: { $in: [idV] } });
+            if (!historial) {
+                res.status(404).json({ error: 'No se encontró el historial con ese video.' });
+                return;
+            }
+
+            // Eliminar el video del historial
+            historial.videos = historial.videos.filter( i => i.toString() !== idV )
+
+            //Guardamos cambios
+            await historial.save() 
 
 
-            res.json(historial || [])
+            res.status(201).send('ok')
 
         } catch (error) {
             res.status(500).json({ error: error.message })

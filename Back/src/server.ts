@@ -1,15 +1,19 @@
-import express from "express" 
-import VideosRt from "./router/VideosRt"  
+import express from "express"
+import VideosRt from "./router/VideosRt"
 import dotenv from "dotenv"
 import { conecctDB } from "./config/db"
 import path from "path";
 import UsuariosRt from "./router/UsuariosRt";
 import AutRt from "./router/AutRt";
 import AdministracionRt from "./router/AdministracionRt";
+import { corsConfig } from "./config/config"
+import cors from 'cors'
+
 
 dotenv.config()
 conecctDB();
 const server = express()
+server.use(cors(corsConfig))
 
 //Leer en conosla...Recuerda Borrarlo en testing
 server.use(express.json())
@@ -17,15 +21,15 @@ server.use(express.json())
 //Ruta de los videos
 const videosPath = path.join(__dirname, 'React\Stem4all\Videos'); // Ruta absoluta a tu carpeta de videos
 server.use('/videos', express.static(videosPath));
-server.use('/api/videos',VideosRt)
+server.use('/api/videos', VideosRt)
 
 //Ruta de los usuarios
-server.use('/api/usuario',UsuariosRt)
+server.use('/api/usuario', UsuariosRt)
 
 //Ruta de la autorizacion
-server.use('/api/aut',AutRt)
+server.use('/api/aut', AutRt)
 
 //Ruta de la administracion
-server.use('/api/administracion',AdministracionRt)
+server.use('/api/administracion', AdministracionRt)
 
 export default server

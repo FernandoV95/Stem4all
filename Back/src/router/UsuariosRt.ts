@@ -17,7 +17,7 @@ UsuariosRt.patch('/:idU/agregar-video/:idV',
     UsuarioCtl.agregarVideo
 )
 
-//Borrar video a la lista
+//Borrar video de la lista
 UsuariosRt.delete('/:idU/borrar-video/:idV',
     InputErrors,
     UsuarioCtl.borrarVideo
